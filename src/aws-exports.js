@@ -7,7 +7,26 @@ const awsmobile = {
     "aws_cognito_region": "ap-south-1",
     "aws_user_pools_id": "ap-south-1_cYmEeBLBA",
     "aws_user_pools_web_client_id": "3reomtej2mmdmi0mr8ridqmlqb",
-    "oauth": {}
+    "oauth": {},
+    "aws_dynamodb_all_tables_region": "ap-south-1",
+    "aws_dynamodb_table_schemas": [
+        {
+            "tableName": "todos-dev",
+            "region": "ap-south-1"
+        }
+    ],
+    "predictions": {
+        "convert": {
+            "speechGenerator": {
+                "region": "ap-south-1",
+                "proxy": false,
+                "defaults": {
+                    "VoiceId": "Ivy",
+                    "LanguageCode": "en-US"
+                }
+            }
+        }
+    }
 };
 
 

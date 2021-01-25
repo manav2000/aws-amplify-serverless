@@ -6,5 +6,18 @@
       "dependsOn": [],
       "customAuth": false
     }
+  },
+  "predictions": {
+    "speechGenerator86dea8d8": {
+      "providerPlugin": "awscloudformation",
+      "service": "Polly",
+      "convertType": "speechGenerator"
+    }
+  },
+  "storage": {
+    "dynamoca018c53": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }
