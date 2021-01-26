@@ -3,9 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-// import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-// import { Auth } from 'aws-amplify';
 import { AmplifySignOut } from '@aws-amplify/ui-react';
 
 const useStyles = makeStyles((theme) => ({
@@ -40,8 +38,7 @@ export default function DenseAppBar({ authToken }) {
           <Link to="/polly" className={classes.link}>
             Try polly
           </Link>
-          {/* <Button onClick={signOut} style={{ marginLeft: 'auto', color: 'white', border: '1px solid white' }}>Sign Out</Button> */}
-          <AmplifySignOut style={{ marginLeft:'auto'}}/>
+          <AmplifySignOut style={{ marginLeft: 'auto'}}/>
         </Toolbar>
       </AppBar>
     </div>
