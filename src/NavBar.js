@@ -47,11 +47,11 @@ export default function DenseAppBar({ authToken }) {
           <Link to="/polly" className={classes.link}>
             Try polly
           </Link>
-            {/* {authToken ?
+            {true ?
                 <Button onClick={signOut} style={{ marginLeft: 'auto', color: 'white', border: '1px solid white' }}>Sign Out</Button>
                 :
                 <></>
-            } */}
+            }
         </Toolbar>
       </AppBar>
     </div>
