@@ -1,6 +1,7 @@
 import './App.css';
-import { useEffect, useState } from 'react';
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Switch, Route, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import { Auth } from 'aws-amplify';
 
@@ -9,31 +10,65 @@ import LambdaSec from './LambdaSec';
 import PollySec from './PollySec';
 import Home from './Home';
 
-function App() {
-  const [authToken, setAuthToken] = useState(false);
+import { getTodos, postTodo, delTodo } from './redux/ActionCreators';
 
-  useEffect(() => {
-    checkAuth();
-  }, [])
-
-  async function checkAuth () {
-    const user = await Auth.currentAuthenticatedUser();
-    const token = user.signInUserSession.idToken.jwtToken;
-    console.log(token);
-    setAuthToken(true);
+const mapStateToProps = (state) => {
+  return {
+      todos: state.todos
   }
-  
-  return (
-    <div className="App">
-      <MenuAppBar authToken={authToken}/>
-      {/* {authToken? <p>authenticated</p> : <p>Nope</p>} */}
-      <Switch>
-        <Route exact path="/" component={Home}/>
-        <Route exact path="/serverless" component={LambdaSec} />
-        <Route exact path="/polly" component={PollySec} />
-      </Switch>
-    </div>
-  );
 }
 
-export default withRouter(withAuthenticator(App));
+const mapDispatchToProps = (dispatch) => ({
+  getTodos: (token) => dispatch(getTodos(token)),
+  postTodo: (token, body) => dispatch(postTodo(token, body)),
+  delTodo: (token, body) => dispatch(delTodo(token, body))
+})
+
+class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      authToken: null
+    }
+  }
+
+  async componentDidMount() {
+    const user = await Auth.currentAuthenticatedUser();
+    const token = user.signInUserSession.idToken.jwtToken;
+    this.props.getTodos(token);
+    this.setState({
+      authToken: token
+    })
+  }
+ 
+  render() {
+
+    const Lambda = () => {
+      if(this.props.todos) {
+        return (
+          <LambdaSec todos={this.props.todos.todos} 
+            authToken={this.state.authToken}
+            postTodo={this.props.postTodo}
+            delTodo={this.props.delTodo}
+          />
+        )
+      } else {
+          <LambdaSec />
+      }
+    }
+
+    return (
+      <div className="App">
+        <MenuAppBar />
+        <Switch>
+          <Route exact path="/" component={Home}/>
+          <Route exact path="/serverless" component={Lambda} />
+          <Route exact path="/polly" component={PollySec} />
+        </Switch>
+      </div>
+    );
+  }
+}
+
+export default withRouter(withAuthenticator(connect(mapStateToProps, mapDispatchToProps)(App)));

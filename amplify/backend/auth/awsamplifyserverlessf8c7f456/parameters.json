@@ -1,6 +1,6 @@
 {
     "identityPoolName": "awsamplifyserverlessf8c7f456_identitypool_f8c7f456",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "awsampf8c7f456",
     "userPoolName": "awsamplifyserverlessf8c7f456_userpool_f8c7f456",
     "autoVerifiedAttributes": [

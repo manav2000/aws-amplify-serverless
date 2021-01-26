@@ -15,6 +15,13 @@ const awsmobile = {
             "region": "ap-south-1"
         }
     ],
+    "aws_cloud_logic_custom": [
+        {
+            "name": "awsProjApi",
+            "endpoint": "https://h25z07pv4c.execute-api.ap-south-1.amazonaws.com/dev",
+            "region": "ap-south-1"
+        }
+    ],
     "predictions": {
         "convert": {
             "speechGenerator": {

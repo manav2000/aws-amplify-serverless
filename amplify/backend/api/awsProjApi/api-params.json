@@ -1,0 +1,45 @@
+{
+    "paths": [
+        {
+            "name": "/todos",
+            "lambdaFunction": "todofunction",
+            "privacy": {
+                "protected": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ],
+                "unauth": [
+                    "/GET"
+                ]
+            },
+            "policyResourceName": "/todos"
+        }
+    ],
+    "resourceName": "awsProjApi",
+    "apiName": "awsProjApi",
+    "functionArns": [
+        {
+            "lambdaFunction": "todofunction"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 1,
+        "authRoleName": "amplify-awsamplifyserverless-dev-192804-authRole",
+        "unAuthRoleName": "amplify-awsamplifyserverless-dev-192804-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "todofunction",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
